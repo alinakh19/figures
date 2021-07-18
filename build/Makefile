@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named hello
+# Target rules for targets named figures
 
 # Build rule for target.
-hello: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 hello
-.PHONY : hello
+figures: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 figures
+.PHONY : figures
 
 # fast build rule for target.
-hello/fast:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/build
-.PHONY : hello/fast
+figures/fast:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/build
+.PHONY : figures/fast
 
 main.o: main.c.o
 
@@ -129,7 +129,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/main.c.o
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -138,7 +138,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/main.c.i
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -147,8 +147,62 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/main.c.s
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/main.c.s
 .PHONY : main.c.s
+
+rectangle.o: rectangle.c.o
+
+.PHONY : rectangle.o
+
+# target to build an object file
+rectangle.c.o:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.o
+.PHONY : rectangle.c.o
+
+rectangle.i: rectangle.c.i
+
+.PHONY : rectangle.i
+
+# target to preprocess a source file
+rectangle.c.i:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.i
+.PHONY : rectangle.c.i
+
+rectangle.s: rectangle.c.s
+
+.PHONY : rectangle.s
+
+# target to generate assembly for a file
+rectangle.c.s:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.s
+.PHONY : rectangle.c.s
+
+triangle.o: triangle.c.o
+
+.PHONY : triangle.o
+
+# target to build an object file
+triangle.c.o:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/triangle.c.o
+.PHONY : triangle.c.o
+
+triangle.i: triangle.c.i
+
+.PHONY : triangle.i
+
+# target to preprocess a source file
+triangle.c.i:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/triangle.c.i
+.PHONY : triangle.c.i
+
+triangle.s: triangle.c.s
+
+.PHONY : triangle.s
+
+# target to generate assembly for a file
+triangle.c.s:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/triangle.c.s
+.PHONY : triangle.c.s
 
 # Help Target
 help:
@@ -158,10 +212,16 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... hello"
+	@echo "... figures"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... rectangle.o"
+	@echo "... rectangle.i"
+	@echo "... rectangle.s"
+	@echo "... triangle.o"
+	@echo "... triangle.i"
+	@echo "... triangle.s"
 .PHONY : help
 
 

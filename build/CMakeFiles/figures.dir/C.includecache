@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/v/Desktop/programming/main.c
+stdio.h
+-
+stdint.h
+-
+rectangle.h
+/home/v/Desktop/programming/rectangle.h
+
+/home/v/Desktop/programming/rectangle.c
+rectangle.h
+/home/v/Desktop/programming/rectangle.h
+stdio.h
+-
+
+/home/v/Desktop/programming/rectangle.h
+stdint.h
+-
+
+/home/v/Desktop/programming/triangle.c
+triangle.h
+/home/v/Desktop/programming/triangle.h
+
+/home/v/Desktop/programming/triangle.h
+stdint.h
+-
+

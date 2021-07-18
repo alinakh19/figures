@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/figures.dir/main.c.o CMakeFiles/figures.dir/rectangle.c.o CMakeFiles/figures.dir/triangle.c.o  -o figures 

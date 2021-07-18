@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/v/Desktop/programming/main.c" "/home/v/Desktop/programming/build/CMakeFiles/hello.dir/main.c.o"
+  "/home/v/Desktop/programming/main.c" "/home/v/Desktop/programming/build/CMakeFiles/figures.dir/main.c.o"
+  "/home/v/Desktop/programming/rectangle.c" "/home/v/Desktop/programming/build/CMakeFiles/figures.dir/rectangle.c.o"
+  "/home/v/Desktop/programming/triangle.c" "/home/v/Desktop/programming/build/CMakeFiles/figures.dir/triangle.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

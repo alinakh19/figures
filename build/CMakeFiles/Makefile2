@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/v/Desktop/programming/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/hello.dir/all
+all: CMakeFiles/figures.dir/all
 
 .PHONY : all
 
@@ -63,36 +63,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/hello.dir/clean
+clean: CMakeFiles/figures.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/hello.dir
+# Target rules for target CMakeFiles/figures.dir
 
 # All Build rule for target.
-CMakeFiles/hello.dir/all:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/depend
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=1,2 "Built target hello"
-.PHONY : CMakeFiles/hello.dir/all
+CMakeFiles/figures.dir/all:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/depend
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=1,2,3,4 "Built target figures"
+.PHONY : CMakeFiles/figures.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/hello.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/v/Desktop/programming/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/hello.dir/all
+CMakeFiles/figures.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/v/Desktop/programming/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/figures.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/v/Desktop/programming/build/CMakeFiles 0
-.PHONY : CMakeFiles/hello.dir/rule
+.PHONY : CMakeFiles/figures.dir/rule
 
 # Convenience name for target.
-hello: CMakeFiles/hello.dir/rule
+figures: CMakeFiles/figures.dir/rule
 
-.PHONY : hello
+.PHONY : figures
 
 # clean rule for target.
-CMakeFiles/hello.dir/clean:
-	$(MAKE) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/clean
-.PHONY : CMakeFiles/hello.dir/clean
+CMakeFiles/figures.dir/clean:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/clean
+.PHONY : CMakeFiles/figures.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
