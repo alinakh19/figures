@@ -1,0 +1,15 @@
+git workflow:
+
+1) add to index all files: 
+    git add .
+
+2) commit your changes:
+    git commit -m "<your commit message>"
+
+3) push your commit to remote repository(origin - name of your repository, master - name of your branch):
+    git push origin master
+
+4) make sure that your commit is uploaded successfully in github web page!
+
+To validate your state check status of your repository:
+    git status
