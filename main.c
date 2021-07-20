@@ -13,11 +13,16 @@ void plot_line();
 int main()
 {
   uint32_t get_x1, get_y1, get_x2, get_y2;;
-  get_points(&get_x1, &get_y1);
-  get_points(&get_x2, &get_y2);
+  // get_points(&get_x1, &get_y1);
+  // get_points(&get_x2, &get_y2);
+  get_x1 =1;
+  get_y1 = 50;
+  get_x2 = 45;
+  get_y2 = 3;
   reset_buf();
-  set_point(get_x1,get_y1,1);
-  set_point(get_x2,get_y2,1);
+  // reset_buf();
+  // set_point(get_x1,get_y1,1);
+  // set_point(get_x2,get_y2,1);
   plot_line(get_x1, get_y1, get_x2, get_y2);
   put_buf();
   printf("%u %u\n", get_x1, get_y1);
