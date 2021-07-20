@@ -6,6 +6,8 @@ set(SOURCE_FILES
 main.c
 rectangle.c
 rectangle.h
+line.c
+line.h
 triangle.c
 triangle.h
 )

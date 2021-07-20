@@ -123,6 +123,33 @@ figures/fast:
 	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/build
 .PHONY : figures/fast
 
+line.o: line.c.o
+
+.PHONY : line.o
+
+# target to build an object file
+line.c.o:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/line.c.o
+.PHONY : line.c.o
+
+line.i: line.c.i
+
+.PHONY : line.i
+
+# target to preprocess a source file
+line.c.i:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/line.c.i
+.PHONY : line.c.i
+
+line.s: line.c.s
+
+.PHONY : line.s
+
+# target to generate assembly for a file
+line.c.s:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/line.c.s
+.PHONY : line.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... figures"
+	@echo "... line.o"
+	@echo "... line.i"
+	@echo "... line.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

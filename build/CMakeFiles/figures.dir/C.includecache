@@ -6,17 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/v/Desktop/programming/main.c
+/home/v/Desktop/programming/line.c
+line.h
+/home/v/Desktop/programming/line.h
+stdlib.h
+-
 stdio.h
 -
 stdint.h
 -
 string.h
 -
-rectangle.h
-/home/v/Desktop/programming/rectangle.h
 
-/home/v/Desktop/programming/rectangle.h
+/home/v/Desktop/programming/line.h
 stdint.h
 -
 
