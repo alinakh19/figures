@@ -1,1 +1,1 @@
-/bin/x86_64-linux-gnu-gcc-9 -g   CMakeFiles/figures.dir/main.c.o CMakeFiles/figures.dir/rectangle.c.o CMakeFiles/figures.dir/line.c.o CMakeFiles/figures.dir/triangle.c.o  -o figures 
+/bin/x86_64-linux-gnu-gcc-9 -g   CMakeFiles/figures.dir/main.c.o CMakeFiles/figures.dir/rectangle.c.o CMakeFiles/figures.dir/line.c.o CMakeFiles/figures.dir/triangle.c.o  -o figures  -lm 

@@ -4,6 +4,7 @@
 CMakeFiles/figures.dir/line.c.o: ../line.c
 CMakeFiles/figures.dir/line.c.o: ../line.h
 
+CMakeFiles/figures.dir/main.c.o: ../line.h
 CMakeFiles/figures.dir/main.c.o: ../main.c
 CMakeFiles/figures.dir/main.c.o: ../rectangle.h
 

@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/v/Desktop/programming/line.h
+stdint.h
+-
+math.h
+-
+
 /home/v/Desktop/programming/main.c
 stdio.h
 -
@@ -17,8 +23,12 @@ stdlib.h
 -
 time.h
 -
+math.h
+-
 rectangle.h
 /home/v/Desktop/programming/rectangle.h
+line.h
+/home/v/Desktop/programming/line.h
 
 /home/v/Desktop/programming/rectangle.h
 stdint.h
