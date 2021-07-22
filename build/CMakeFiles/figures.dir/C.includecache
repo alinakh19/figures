@@ -6,19 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/v/Desktop/programming/line.c
-line.h
-/home/v/Desktop/programming/line.h
-stdlib.h
--
+/home/v/Desktop/programming/main.c
 stdio.h
 -
 stdint.h
 -
 string.h
 -
+stdlib.h
+-
+time.h
+-
+rectangle.h
+/home/v/Desktop/programming/rectangle.h
 
-/home/v/Desktop/programming/line.h
+/home/v/Desktop/programming/rectangle.h
 stdint.h
 -
 

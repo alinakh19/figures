@@ -13,3 +13,12 @@ git workflow:
 
 To validate your state check status of your repository:
     git status
+
+
+add feature:
+1) create branch and checkout to new branch:
+    git checkout -b <name of branch>
+
+2) git status
+
+3) make changes to your new branch
