@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include <math.h>
+
 
 void reset_buf(void)
 {
@@ -25,11 +25,30 @@ void set_point(uint32_t x, uint32_t y, uint32_t val)
   }
 }
 
+// void put_buf(uint32_t max_x, uint32_t min_x, uint32_t max_y, uint32_t min_y)
+// {
+//   for (uint32_t x=min_x; x<=max_x; x++)
+//   {
+//     for (uint32_t y=min_y; y<=max_y; y++)
+//     {
+//       if (gridchart[x][y] == 1)
+//       {
+//         printf("o");
+//       }
+//       else
+//       {
+//         printf(" ");
+//       }
+//     }
+//     printf("|\n");
+//   }
+// }
+
 void put_buf()
 {
-  for (uint32_t x=0; x<=A; x++)
+  for (uint32_t x=1; x<=A; x++)
   {
-    for (uint32_t y=0; y<=B; y++)
+    for (uint32_t y=1; y<=B; y++)
     {
       if (gridchart[x][y] == 1)
       {
@@ -43,6 +62,7 @@ void put_buf()
     printf("|\n");
   }
 }
+
 
 void get_points(uint32_t * x, uint32_t * y)
 {
@@ -71,62 +91,50 @@ void  plot_line (int x0, int y0, int x1, int y1)
   }
 }
 
-void fill_triangle(uint32_t x1,uint32_t y1,uint32_t x2,uint32_t y2,uint32_t x3,uint32_t y3)
-{  
-    uint32_t tx, ty, counter;
-    float d1, d2, d3, vx, vy;
-    //get length of all sides
-    d1 = sqrt(((y2-y1)^2)+((x2-x1)^2));
-    d2 = sqrt(((y3-y2)^2)+((x3-x2)^2));
-    d3 = sqrt(((y1-y3)^2)+((x1-x3)^2));
-    if(((d1<d2)||(d1=d2))&&((d1<d2)||(d1=d2))) //the first side is the shortest
-    { 
-        tx = x1;
-        ty = y1;
-        vx = ( (int32_t)((int32_t)x2-(int32_t)x1) )/d1;
-        vy = ( (int32_t)((int32_t)y2-(int32_t)y1) )/d1;
-        counter = 0;
-        while(counter<d1)
-        {  
-            plot_line(x3,y3,tx,ty);
-            //drawing a line from point(x3,y3) to point(tx,ty).
-            tx = tx + vx;
-            ty = ty + vy;
-            counter = counter + 1;
+uint32_t max_3num(uint32_t num1, uint32_t num2, uint32_t num3)
+{
+  if (num1 > num2)
+    {
+        if (num1 > num3)
+        {
+          return num1;
         }
-    }   
-    else 
-    { 
-        if( ( d2<d3 ) || ( d2=d3 ) ) //the second side is the shortest
-        { 
-            tx = x2;
-            ty = y2;
-            vx = (x3-x2)/d2;
-            vy = (y3-y2)/d2;
-            counter = 0;
-            while(counter<d2)
-            { 
-                plot_line(x1,y1,tx,ty);
-                tx = tx + vx;
-                ty = ty + vy;
-                counter = counter + 1;
-            }
+        else
+        {
+          return num3;
         }
-        else // the third side is shortest
-        {  
-            tx = x3;
-            ty = y3;
-            vx = (x1-x3)/d3;
-            vy = (y1-y3)/d3;
-            counter = 0;
-            while(counter<d3)
-            { 
-                plot_line(x2,y2,tx,ty);
-                tx = tx + vx;
-                ty = ty + vy;
-                counter = counter + 1;
-            }
+    }
+    else if (num2 > num3)
+      {
+        return num2;
+      }
+    else
+    {
+      return num3;
+    }
+}
+
+
+uint32_t min_3num(uint32_t num1, uint32_t num2, uint32_t num3)
+{
+  if (num1 < num2)
+    {
+        if (num1 < num3)
+        {
+          return num1;
         }
+        else
+        {
+          return num3;
+        }
+    }
+    else if (num2 < num3)
+      {
+        return num2;
+      }
+    else
+    {
+      return num3;
     }
 }
 // void paint_over(void)

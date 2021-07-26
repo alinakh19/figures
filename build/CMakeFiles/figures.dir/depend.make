@@ -11,6 +11,7 @@ CMakeFiles/figures.dir/main.c.o: ../rectangle.h
 CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.c
 CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.h
 
+CMakeFiles/figures.dir/triangle.c.o: ../line.h
 CMakeFiles/figures.dir/triangle.c.o: ../triangle.c
 CMakeFiles/figures.dir/triangle.c.o: ../triangle.h
 
