@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/v/Desktop/programming/line.c
-line.h
-/home/v/Desktop/programming/line.h
-stdlib.h
--
-stdio.h
--
-stdint.h
--
-string.h
--
-
 /home/v/Desktop/programming/line.h
 stdint.h
 -
@@ -43,20 +31,6 @@ line.h
 /home/v/Desktop/programming/line.h
 
 /home/v/Desktop/programming/rectangle.h
-stdint.h
--
-
-/home/v/Desktop/programming/triangle.c
-triangle.h
-/home/v/Desktop/programming/triangle.h
-math.h
--
-stdint.h
--
-line.h
-/home/v/Desktop/programming/line.h
-
-/home/v/Desktop/programming/triangle.h
 stdint.h
 -
 

@@ -6,34 +6,16 @@
 #include <math.h>
 #include "rectangle.h"
 #include "line.h"
-// static const uint32_t A = 100;
-// static const uint32_t B = 100;
-void reset_buf();
-void get_points(uint32_t * x, uint32_t * y);
-void set_point(uint32_t x, uint32_t y, uint32_t val);
-// void put_buf(uint32_t max_x, uint32_t min_x, uint32_t max_y, uint32_t min_y);
-void put_buf();
-void plot_line();
-void fill_triangle(uint32_t x1,uint32_t y1,uint32_t x2,uint32_t y2,uint32_t x3,uint32_t y3);
-// void get_rand(uint32_t *x1, uint32_t *y1, uint32_t *x2, uint32_t *y2, uint32_t *x3, uint32_t *y3);
-void get_rand(uint32_t *x1, uint32_t *y1);
-// void func(int* a, int* b);
-// void paint_over(void);
-uint32_t max_3num(uint32_t num1, uint32_t num2, uint32_t num3);
-uint32_t min_3num(uint32_t num1, uint32_t num2, uint32_t num3);
 
 int main()
 {
-  uint32_t get_x1, get_y1, get_x2, get_y2, get_x3, get_y3, get_x4, get_y4;
+  Point point_1, point_2, point_3;
+  float x_centr, y_centr;
   // get_points(&get_x1, &get_y1);
   // get_points(&get_x2, &get_y2);
-  get_rand(&get_x1, &get_y1);
-  // apex_1=get_y1;
-  get_rand(&get_x2, &get_y2);
-  // apex_2=get_y2;
-  get_rand(&get_x3, &get_y3);
-  // apex_3=get_y3;
-  get_rand(&get_x4, &get_y4);
+  Point point_1 = get_random_point();
+  Point point_2 = get_random_point();
+  Point point_3 = get_random_point();
   // get_x1 =1;
   // get_y1 = 50;
   // get_x2 = 45;
@@ -45,9 +27,10 @@ int main()
   // plot_line(get_x1, get_y1, get_x2, get_y2);
   // plot_line(get_x1, get_y1, get_x3, get_y3);
   // plot_line(get_x2, get_y2, get_x3, get_y3);
-   // paint_over();
-  fill_triangle(get_x1, get_y1, get_x2, get_y2, get_x3, get_y3);
-  fill_triangle(get_x3, get_y3, get_x4, get_y4, get_x1, get_y1);
+  centoid_triangle(get_x1, get_y1, get_x2, get_y2, get_x3, get_y3, &x_centr, &y_centr);
+  fill_triangle(get_x1, get_y1, get_x2, get_y2, x_centr, y_centr);
+  // fill_triangle(get_x1, get_y1, get_x3, get_y3, x_centr, y_centr);
+  // fill_triangle(get_x2, get_y2, get_x3, get_y3, x_centr, y_centr);
   // max_x = max_3num(get_x1, get_x2, get_x3);
   // min_x = min_3num(get_x1, get_x2, get_x3);
   // max_y = max_3num(get_y1, get_y2, get_y3);
@@ -57,7 +40,7 @@ int main()
   printf("%u %u\n", get_x1, get_y1);
   printf("%u %u\n", get_x2, get_y2);
   printf("%u %u\n", get_x3, get_y3);
-  printf("%u %u\n", get_x4, get_y4);
+  printf("%f %f\n", x_centr, y_centr);
   // int out_a, out_b;
   // func(&out_a, &out_b);
   // printf("%d %d\n", out_a, out_b);
@@ -66,20 +49,13 @@ int main()
     return 0;
 }
 
-void get_rand(uint32_t *x1, uint32_t *y1)
+
+
+void centoid_triangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, float * x_c, float * y_c)
 {
-  static uint32_t init_flag = 0;
-  if (init_flag==0)
-  { 
-    srand(time(0));
-    init_flag=1;
-  }
-    *x1 = rand() % A;
-    *y1 = rand() % B;
-    printf("%ld\n", time(0));
+  *x_c = ((float)x1 + (float)x2 + (float)x3) / 3;
+  *y_c = ((float)y1 + (float)y2 + (float)y3) / 3;
 }
-
-
 
 // void func(int* a, int* b)
 // {
