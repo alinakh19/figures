@@ -1,12 +1,20 @@
-#include <stdint.h>
-typedef struct Point
-{
-    uint32_t x;
-    uint32_t y;
-} Point;
+#ifndef TYPES_H
+#define TYPES_H
 
-typedef enum PointVal
+#include <stdint.h>
+typedef struct
 {
-    POINT_UNSET = 0,
-    POINT_SET = 1
-} PointVal;
+    int32_t x;
+    int32_t y;
+}Point;
+
+typedef enum
+{
+    COLOR_RED = 0,
+    COLOR_GREEN,
+    COLOR_BLUE,
+    COLOR_BLACK,
+    COLOR_WHITE
+}Color;
+
+#endif

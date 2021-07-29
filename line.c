@@ -7,12 +7,12 @@
 
 void reset_buf()
 {
-  memset(gridchart, 0, sizeof(gridchart));
+  memset(gridchart, COLOR_GREEN, sizeof(gridchart));
 }
 
-void set_point(Point point, PointVal val)
+void set_point(Point point, Color val)
 {
-  if ((point.x > 0) && (point.x < A) && (point.y > 0) && (point.y < B))
+  if ((point.x >= 0) && (point.x <= A) && (point.y >= 0) && (point.y <= B))
   {
     gridchart[point.x][point.y] = val;
     // printf("Draw point with coordinates (%u;%u)\n", x, y);
@@ -21,7 +21,6 @@ void set_point(Point point, PointVal val)
   else
   {
     printf("Error occuried: wrong coordinates (%u;%u)\n", point.x, point.y);
-
   }
 }
 
@@ -32,13 +31,38 @@ void put_buf()
   {
     for (uint32_t y=1; y<=B; y++)
     {
-      if (gridchart[x][y] == 1)
+      switch (gridchart[x][y])
       {
-        printf("o");
-      }
-      else
-      {
-        printf(" ");
+        case COLOR_RED: 
+        {
+          printf("\033[0;31m");
+          printf("o");
+          break;
+        }
+        case COLOR_GREEN:
+        {
+          printf("\033[0;32m");
+          printf("o");
+          break;
+        }
+        case COLOR_BLUE:
+        {
+          printf("\033[0;34m");
+          printf("o");
+          break;
+        }
+         case COLOR_BLACK:
+        {
+          printf("\033[0;30m");
+          printf("o");
+          break;
+        }
+        default:
+        {
+          printf("\033[0;37m");
+          printf(" ");
+          break;
+        }
       }
     }
     printf("|\n");
@@ -65,7 +89,7 @@ void  plot_line (Point point_1, Point point_2)
  
   for (;;)
   {  /* loop */
-    set_point(point_1, 1);
+    set_point(point_1, COLOR_BLACK);
     // printf("%u %u\n", x0, y0);
     if (point_1.x == point_2.x && point_1.y == point_2.y) break;
     e2 = 2 * err;
@@ -85,6 +109,6 @@ Point get_random_point()
   }
   point.x = rand() % A;
   point.y = rand() % B;
-  printf("%ld\n", time(0));
+  // printf("%ld\n", time(0));
   return point;
 }

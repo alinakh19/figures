@@ -11,12 +11,12 @@ static void inner()
 
 void fill_triangle(Point point_1, Point point_2, Point point_3)
 {  
-    uint32_t tx, ty, counter;
+    int32_t tx, ty, counter;
     float d1, d2, d3, vx, vy;
     //get length of all sides
-    d1 = sqrt(((point_2.y-point_1.y)^2)+((point_2.x-point_1.x)^2));
-    d2 = sqrt(((point_3.y-point_2.y)^2)+((point_3.x-point_2.x)^2));
-    d3 = sqrt(((point_1.y-point_3.y)^2)+((point_1.x-point_2.x)^2));
+    d1 = sqrt(  pow(point_2.y-point_1.y, 2) +   pow(point_2.x-point_1.x, 2) );
+    d2 = sqrt(  pow(point_3.y-point_2.y, 2) +   pow(point_3.x-point_2.x, 2) );
+    d3 = sqrt(  pow(point_1.y-point_3.y, 2) +   pow(point_1.x-point_3.x, 2) );
     if(((d1<d2)||(d1 == d2))&&((d1<d2)||(d1 == d2))) //the first side is the shortest
     { 
         tx = point_1.x;
@@ -26,7 +26,10 @@ void fill_triangle(Point point_1, Point point_2, Point point_3)
         counter = 0;
         while(counter<d1)
         {  
-            plot_line(point_3.x, point_3.y, tx, ty);
+            Point point_tmp;
+            point_tmp.x = tx;
+            point_tmp.y = ty;
+            plot_line(point_3, point_tmp);
             //drawing a line from point(point_3.x,point_3.y) to point(tx,ty).
             tx = tx + vx;
             ty = ty + vy;
@@ -44,7 +47,10 @@ void fill_triangle(Point point_1, Point point_2, Point point_3)
             counter = 0;
             while(counter<d2)
             { 
-                plot_line(point_1.x, point_1.y, tx, ty);
+                Point point_tmp;
+                point_tmp.x = tx;
+                point_tmp.y = ty;
+                plot_line(point_1 , point_tmp);
                 tx = tx + vx;
                 ty = ty + vy;
                 counter = counter + 1;
@@ -59,7 +65,10 @@ void fill_triangle(Point point_1, Point point_2, Point point_3)
             counter = 0;
             while(counter<d3)
             { 
-                plot_line(point_2.x, point_2.y, tx, ty);
+                Point point_tmp;
+                point_tmp.x = tx;
+                point_tmp.y = ty;
+                plot_line(point_2, point_tmp);
                 tx = tx + vx;
                 ty = ty + vy;
                 counter = counter + 1;

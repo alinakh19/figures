@@ -3,10 +3,13 @@
 
 CMakeFiles/figures.dir/line.c.o: ../line.c
 CMakeFiles/figures.dir/line.c.o: ../line.h
+CMakeFiles/figures.dir/line.c.o: ../types.h
 
 CMakeFiles/figures.dir/main.c.o: ../line.h
 CMakeFiles/figures.dir/main.c.o: ../main.c
 CMakeFiles/figures.dir/main.c.o: ../rectangle.h
+CMakeFiles/figures.dir/main.c.o: ../triangle.h
+CMakeFiles/figures.dir/main.c.o: ../types.h
 
 CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.c
 CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.h
@@ -14,4 +17,5 @@ CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.h
 CMakeFiles/figures.dir/triangle.c.o: ../line.h
 CMakeFiles/figures.dir/triangle.c.o: ../triangle.c
 CMakeFiles/figures.dir/triangle.c.o: ../triangle.h
+CMakeFiles/figures.dir/triangle.c.o: ../types.h
 

@@ -11,6 +11,8 @@ stdint.h
 -
 math.h
 -
+types.h
+/home/v/Desktop/programming/types.h
 
 /home/v/Desktop/programming/main.c
 stdio.h
@@ -29,8 +31,20 @@ rectangle.h
 /home/v/Desktop/programming/rectangle.h
 line.h
 /home/v/Desktop/programming/line.h
+triangle.h
+/home/v/Desktop/programming/triangle.h
 
 /home/v/Desktop/programming/rectangle.h
+stdint.h
+-
+
+/home/v/Desktop/programming/triangle.h
+stdint.h
+-
+types.h
+/home/v/Desktop/programming/types.h
+
+/home/v/Desktop/programming/types.h
 stdint.h
 -
 

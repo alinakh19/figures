@@ -12,7 +12,7 @@ static uint32_t gridchart[A+1][B+1];
 // this function draw line in array
 void reset_buf();
 
-void set_point(Point point, uint32_t val);
+void set_point(Point point, Color val);
 
 void put_buf();
 
@@ -20,6 +20,6 @@ void get_points(Point * point);
 
 void plot_line(Point point_1, Point point_2);
 
-Point get_random_point()
+Point get_random_point();
 
 #endif
