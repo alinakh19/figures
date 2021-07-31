@@ -27,9 +27,9 @@ void set_point(Point point, Color val)
 
 void put_buf()
 {
-  for (uint32_t x=1; x<=A; x++)
+  for (uint32_t x=0; x<=A; x++)
   {
-    for (uint32_t y=1; y<=B; y++)
+    for (uint32_t y=0; y<=B; y++)
     {
       switch (gridchart[x][y])
       {
@@ -51,9 +51,15 @@ void put_buf()
           printf("o");
           break;
         }
-         case COLOR_BLACK:
+        case COLOR_BLACK:
         {
           printf("\033[0;30m");
+          printf("o");
+          break;
+        }
+        case COLOR_PURPLE:
+        {
+          printf("\033[0;35m");
           printf("o");
           break;
         }
@@ -80,7 +86,7 @@ void get_points(Point * point)
     cnt++;
 }
 
-void  plot_line (Point point_1, Point point_2)
+void  plot_line (Point point_1, Point point_2, Color color)
 {
   int32_t dx =  abs (point_2.x - point_1.x), sx = point_1.x < point_2.x ? 1 : -1;
   int32_t dy = -abs (point_2.y - point_1.y), sy = point_1.y < point_2.y ? 1 : -1; 
@@ -89,7 +95,7 @@ void  plot_line (Point point_1, Point point_2)
  
   for (;;)
   {  /* loop */
-    set_point(point_1, COLOR_BLACK);
+    set_point(point_1, color);
     // printf("%u %u\n", x0, y0);
     if (point_1.x == point_2.x && point_1.y == point_2.y) break;
     e2 = 2 * err;
@@ -111,4 +117,34 @@ Point get_random_point()
   point.y = rand() % B;
   // printf("%ld\n", time(0));
   return point;
+}
+
+uint8_t get_line_intersection(Point point_1, Point point_2, Point point_3, Point point_4, Point * point_collision)
+{
+  float s1_x, s1_y, s2_x, s2_y;
+  s1_x = (float)(point_2.x) - (float)(point_1.x);
+  s2_x = (float)(point_3.x) - (float)(point_2.x);
+  s1_y = (float)(point_2.y) - (float)(point_1.y);
+  s2_y = (float)(point_3.y) - (float)(point_2.y);
+  float s, t;
+  s = (-s1_y * ( (float) (point_1.x) - (float) (point_3.x) ) + s1_x * ( (float) (point_1.y) - (float) (point_3.y) )) / (-s2_x * s1_y + s1_x * s2_y);
+  t = ( s2_x * ( (float) (point_1.y) - (float) (point_3.y) ) - s2_y * ( (float) (point_1.x) - (float) (point_3.x) )) / (-s2_x * s1_y + s1_x * s2_y);
+
+  // printf("s = %f, t = %f\n", s, t);
+  if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
+  {
+    // Collision detected
+    if (point_collision->x != NULL)
+    {
+      point_collision->x = point_1.x + (t * s1_x);
+    }
+    if (point_collision->y != NULL)
+    {
+      point_collision->y = point_1.y + (t * s1_y);
+    }
+    return 1;
+  }
+
+    return 0; // No collision
+
 }

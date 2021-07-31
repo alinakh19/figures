@@ -2,6 +2,7 @@
 #define LINE_H
  
 #include <stdint.h>
+#include <stddef.h>
 #include <math.h>
 #include "types.h"
 #define A 50
@@ -18,8 +19,10 @@ void put_buf();
 
 void get_points(Point * point);
 
-void plot_line(Point point_1, Point point_2);
+void plot_line(Point point_1, Point point_2, Color color);
 
 Point get_random_point();
+
+uint8_t get_line_intersection(Point point_1, Point point_2, Point point_3, Point point_4, Point * point_collision);
 
 #endif

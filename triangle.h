@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include "types.h"
 // this function draw triangle
-void fill_triangle(Point point_1, Point point_2, Point point_3);
-
+Triangle get_random_triangle();
+void fill_triangle(Triangle triangle);
+uint8_t is_inner(Triangle triangle, Point point);
+uint8_t on_segment(Line line, Point point);
+uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point);
 #endif

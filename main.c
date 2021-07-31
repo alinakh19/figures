@@ -8,36 +8,48 @@
 #include "line.h"
 #include "triangle.h"
 
+void triangle()
+{
+  Triangle triangle = get_random_triangle();
+  reset_buf();
+  Point point_of_origin;
+  memset(&point_of_origin, 0, sizeof(point_of_origin));
+  Point * point_collision;
+  fill_triangle(triangle);
+  set_point(triangle.point_1, COLOR_BLUE);
+  set_point(triangle.point_2, COLOR_GREEN);
+  set_point(triangle.point_3, COLOR_PURPLE);
+  put_buf();
+  // printf("%u %u\n", triangle.point_1.x, triangle.point_1.y);
+  // printf("%u %u\n", triangle.point_2.x, triangle.point_2.y);
+  // printf("%u %u\n", triangle.point_3.x, triangle.point_3.y);
+}
+
+void intersection()
+{
+  Line line1 = {.point_1 = get_random_point(), .point_2 = get_random_point()};
+  Line line2 = {.point_1 = get_random_point(), .point_2 = get_random_point()};
+  Point int_point;
+  if (line_intersection(line1, line2, &int_point))
+  {
+    reset_buf();
+    plot_line (line1.point_1, line1.point_2, COLOR_BLUE);
+    plot_line (line2.point_1, line2.point_2, COLOR_RED);
+    plot_line ((Point){.x = 0, .y = int_point.y}, (Point){.x = A, .y = int_point.y}, COLOR_GREEN);
+    plot_line ((Point){.x = int_point.x, .y = 0}, (Point){.x = int_point.x, .y = B}, COLOR_GREEN);
+    put_buf();
+  }
+}
+
 int main()
 {
-  while (1)
+  
+  while(1)
   {
-    Point point_1 = get_random_point();
-    Point point_2 = get_random_point();
-    Point point_3 = get_random_point();
-    // Point point_1 = {.x = 1, .y = 14};
-    // Point point_2 = {.x = 21, .y = 22};
-    // Point point_3 = {.x = 30, .y = 16};
-    reset_buf();
-    fill_triangle(point_1, point_2, point_3);
-    set_point(point_1, COLOR_BLUE);
-    set_point(point_2, COLOR_GREEN);
-    set_point(point_3, COLOR_RED);
-    put_buf();
-  // // while(1)
-  // {
-    // point_1 = get_random_point();
-    // point_2 = get_random_point();
-    // point_3 = get_random_point();
-    // reset_buf();
-    // fill_triangle(point_1, point_2, point_3);
-    // put_buf();
-  // }
-    printf("%u %u\n", point_1.x, point_1.y);
-    printf("%u %u\n", point_2.x, point_2.y);
-    printf("%u %u\n", point_3.x, point_3.y);
+    // intersection();
+    triangle();
   }
-    return 0;
+  return 0;
 }
 
 
