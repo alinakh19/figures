@@ -18,5 +18,10 @@
   "directory": "/home/v/Desktop/programming/build",
   "command": "/bin/x86_64-linux-gnu-gcc-9   -g   -o CMakeFiles/figures.dir/triangle.c.o   -c /home/v/Desktop/programming/triangle.c",
   "file": "/home/v/Desktop/programming/triangle.c"
+},
+{
+  "directory": "/home/v/Desktop/programming/build",
+  "command": "/bin/x86_64-linux-gnu-gcc-9   -g   -o CMakeFiles/figures.dir/libattopng.c.o   -c /home/v/Desktop/programming/libattopng.c",
+  "file": "/home/v/Desktop/programming/libattopng.c"
 }
 ]

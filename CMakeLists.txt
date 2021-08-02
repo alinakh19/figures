@@ -12,6 +12,8 @@ line.c
 line.h
 triangle.c
 triangle.h
+libattopng.c
+libattopng.h
 )
 
 add_executable(${PROJECT_NAME} 

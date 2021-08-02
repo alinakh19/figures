@@ -2,11 +2,14 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
+
 #include <math.h>
 #include "rectangle.h"
 #include "line.h"
 #include "triangle.h"
+
+#include "libattopng.h"
+
 
 void triangle()
 {
@@ -19,7 +22,7 @@ void triangle()
   set_point(triangle.point_1, COLOR_BLUE);
   set_point(triangle.point_2, COLOR_GREEN);
   set_point(triangle.point_3, COLOR_PURPLE);
-  put_buf();
+  put_buf_pixel();
   // printf("%u %u\n", triangle.point_1.x, triangle.point_1.y);
   // printf("%u %u\n", triangle.point_2.x, triangle.point_2.y);
   // printf("%u %u\n", triangle.point_3.x, triangle.point_3.y);
@@ -53,15 +56,9 @@ int main()
 }
 
 
-
-// void centoid_triangle(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2, uint32_t x3, uint32_t y3, float * x_c, float * y_c)
-// {
-//   *x_c = ((float)x1 + (float)x2 + (float)x3) / 3;
-//   *y_c = ((float)y1 + (float)y2 + (float)y3) / 3;
-// }
-
 // void func(int* a, int* b)
 // {
 //   *a = 54;
 //   *b = 38;
 // }
+

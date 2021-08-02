@@ -123,6 +123,33 @@ figures/fast:
 	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/build
 .PHONY : figures/fast
 
+libattopng.o: libattopng.c.o
+
+.PHONY : libattopng.o
+
+# target to build an object file
+libattopng.c.o:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/libattopng.c.o
+.PHONY : libattopng.c.o
+
+libattopng.i: libattopng.c.i
+
+.PHONY : libattopng.i
+
+# target to preprocess a source file
+libattopng.c.i:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/libattopng.c.i
+.PHONY : libattopng.c.i
+
+libattopng.s: libattopng.c.s
+
+.PHONY : libattopng.s
+
+# target to generate assembly for a file
+libattopng.c.s:
+	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/libattopng.c.s
+.PHONY : libattopng.c.s
+
 line.o: line.c.o
 
 .PHONY : line.o
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... figures"
+	@echo "... libattopng.o"
+	@echo "... libattopng.i"
+	@echo "... libattopng.s"
 	@echo "... line.o"
 	@echo "... line.i"
 	@echo "... line.s"

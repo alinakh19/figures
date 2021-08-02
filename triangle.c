@@ -86,12 +86,9 @@ Triangle get_random_triangle()
   Point point_1 = get_random_point();
   Point point_2 = get_random_point();
   Point point_3 = get_random_point();
-  memcpy(&triangle.point_1.x, &point_1.x, sizeof(point_1.x));
-  memcpy(&triangle.point_1.y, &point_1.y, sizeof(point_1.y));
-  memcpy(&triangle.point_2.x, &point_2.x, sizeof(point_2.x));
-  memcpy(&triangle.point_2.y, &point_2.y, sizeof(point_2.y));
-  memcpy(&triangle.point_3.x, &point_3.x, sizeof(point_3.x));
-  memcpy(&triangle.point_3.y, &point_3.y, sizeof(point_3.y));
+  memcpy(&triangle.point_1, &point_1, sizeof(Point));
+  memcpy(&triangle.point_2, &point_2, sizeof(Point));
+  memcpy(&triangle.point_3, &point_3, sizeof(Point));
   return triangle;
 }
 
@@ -104,6 +101,7 @@ void fill_triangle(Triangle triangle)
     {
         point.x=x;
         point.y=y;
+        printf("%u %u\n", x, y);
         if (is_inner(triangle, point))
         {
             set_point(point, COLOR_RED);
@@ -120,6 +118,7 @@ uint8_t is_inner(Triangle triangle, Point point)
 {
     // __PRETTY_FUNCTION__;
     Point point_of_origin;
+    Point collision_point[3];
     uint8_t cnt = 0;
     memset(&point_of_origin, 0, sizeof(point_of_origin));
     // point_of_origin.x = point.x;
@@ -138,6 +137,10 @@ uint8_t is_inner(Triangle triangle, Point point)
         // printf("is_inner (%d, %d) true\n", point.x, point.y);
         cnt++;
     };
+    // if (cnt == 3)
+    // {
+    //     cnt=2;
+    // }
     // printf("%d, %d, %d\n", point.x, point.y, cnt);
     return cnt % 2;
 }
@@ -218,38 +221,3 @@ uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point)
         return 0;
     }
 }
-
-// struct point
-// {
-//   double x,y;
-// };
-// int get_points_of_intersection(double x10,double y10,double r1 ,//координаты центра и радиус
-//                         double x20,double y20,double r2 ,
-//                         point &first , point &second  ) //возвращаем результаты
-// {
-//     double x0,y0;//координаты точки пересечения всех линий
-
-//     double d;//расстояние между центрами окружностей
-//     double a;//расстояние от r1 до точки пересечения всех линий
-//     double h;//расстояние от точки пересеч окружностей до точки пересеч всех линий
-
-//     d=sqrt( pow(abs(x10-x20),2) + pow(abs(y10-y20),2));
-//     if(d > r1+r2) return 0; //окружности не пересекаются
-
-//     a= (r1*r1 - r2*r2 + d*d ) / (2*d);
-//     h= sqrt( pow(r1,2) - pow(a,2));
-
-
-//     x0 = x10 + a*( x20 - x10 ) / d;
-//     y0 = y10 + a*( y20 - y10 ) / d;
-
-//     first.x= x0 + h*( y20 - y10 ) / d;
-//     first.y= y0 - h*( x20 - x10 ) / d;
-
-//     if(a == r1 ) return 1; //окружности соприкасаются
-
-//     second.x= x0 - h*( y20 - y10 ) / d;
-//     second.y= y0 + h*( x20 - x10 ) / d;
-
-//     return 2;//окружности пересекаются
-// }
