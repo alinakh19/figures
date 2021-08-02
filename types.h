@@ -2,6 +2,15 @@
 #define TYPES_H
 
 #include <stdint.h>
+#define max(a,b) \
+   ({ typeof (a) _a = (a); \
+       typeof (b) _b = (b); \
+     _a > _b ? _a : _b; })
+#define min(a,b) \
+   ({ typeof (a) _a = (a); \
+       typeof (b) _b = (b); \
+     _a < _b ? _a : _b; })
+
 typedef struct
 {
     float x;
@@ -31,5 +40,6 @@ typedef enum
     COLOR_WHITE,
     COLOR_PURPLE
 }Color;
+
 
 #endif

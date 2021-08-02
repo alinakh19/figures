@@ -79,7 +79,7 @@ void put_buf()
 void put_buf_pixel()
 {
 // ceate palette image
-libattopng_t *png = libattopng_new(256, 256, PNG_PALETTE);
+libattopng_t *png = libattopng_new(A, B, PNG_PALETTE);
 uint32_t palette[] = {RGBA(0, 0, 0xff, 0xff), RGBA(0, 0xff, 0, 0x80), RGBA(0xff, 0, 0, 0xff), RGBA(0xff, 0, 0xff, 0x80)};
 // 4 colors: blue, green (50% alpha), red, cyan (50% alpha) 
 libattopng_set_palette(png, palette, 4);

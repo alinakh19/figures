@@ -1,10 +1,12 @@
 #include "triangle.h"
 #include <math.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "line.h"
+#include "types.h"
 static int det(Point a, Point b);
-static int max(int a, int b);
-static int min(int a, int b);
+// static int max(int a, int b);
+// static int min(int a, int b);
 static void inner();
 
 static void inner()
@@ -95,54 +97,127 @@ Triangle get_random_triangle()
 void fill_triangle(Triangle triangle)
 {
     Point point;
+    Point point_max, point_min;
+    point_max.x=max(max(triangle.point_1.x,triangle.point_2.x),triangle.point_3.x);
+    point_min.x=min(min(triangle.point_1.x,triangle.point_2.x),triangle.point_3.x);
+    point_max.y=max(max(triangle.point_1.y,triangle.point_2.y),triangle.point_3.y);
+    point_min.y=min(min(triangle.point_1.y,triangle.point_2.y),triangle.point_3.y);
+    // printf("%f %f %f %f %f\n", triangle.point_1.x, triangle.point_2.x, triangle.point_3.x, point_max.x, point_min.x);
     for (uint32_t x=0; x<=A; x++)
-  {
-    for (uint32_t y=0; y<=B; y++)
     {
-        point.x=x;
-        point.y=y;
-        printf("%u %u\n", x, y);
-        if (is_inner(triangle, point))
+        for (uint32_t y=0; y<=B; y++)
         {
-            set_point(point, COLOR_RED);
-        }
-        else
-        {
+            point.x=x;
+            point.y=y;
+            // printf("%u %u\n", x, y);
+            if (is_inner(triangle, point))
+            {
+                // if ((point.x>point_max.x) && (point.x<point_min.x) || (point.y>point_max.y) && (point.y<point_min.y))
+                if ( on_segment( (Line){.point_1 = point_min,.point_2 = point_max}, point) )
+                {
+                    set_point(point, COLOR_RED);
+                }
+                else
+                {
+                    // printf("Error, point is outside the rectangle\n");
+                    // is_inner(triangle, point);
+                }
+            }
+            else
+            {
 
+            }
         }
     }
-  }
+}
+Triangle get_triangle(Point point_1, Point point_2, Point point_3)
+{
+    return (Triangle){.point_1 = point_1, .point_2 = point_2,  .point_3 = point_3};
+}
+
+void print_triangle(Triangle triangle, const char * name)
+{
+    printf("-----------\n");
+    printf("Print triangle %s\n");
+    print_point(triangle.point_1, "point_1");
+    print_point(triangle.point_2, "point_2");
+    print_point(triangle.point_3, "point_3");
+    printf("-----------\n");
+}
+
+void print_point(Point point, const char * name)
+{
+    printf("Point coordinates %s: (%f,%f)\n", name, point.x, point.y);
+}
+
+uint8_t is_point_in_triangle(Point point, Triangle triangle)
+{
+    if ( ((point.x == triangle.point_1.x) && (point.y == triangle.point_1.y)) ||
+    ((point.x == triangle.point_2.x) && (point.y == triangle.point_2.y)) ||
+    ((point.x == triangle.point_3.x) && (point.y == triangle.point_3.y)) )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 uint8_t is_inner(Triangle triangle, Point point)
 {
-    // __PRETTY_FUNCTION__;
     Point point_of_origin;
-    Point collision_point[3];
+    
+    Point nan_point = {.x = NAN, .y = NAN};
+    Triangle collision_triangle = get_triangle(nan_point, nan_point, nan_point);
     uint8_t cnt = 0;
+    Point collis_point;
     memset(&point_of_origin, 0, sizeof(point_of_origin));
-    // point_of_origin.x = point.x;
-    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2}, (Line){.point_1 = point_of_origin, .point_2 =  point}, NULL) == 1)
+    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
     {
-        // printf("is_inner (%d, %d) true\n", point.x, point.y);
-        cnt++;
+        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+        {
+            collision_triangle.point_1.x = collis_point.x;
+            collision_triangle.point_1.y = collis_point.y;
+            cnt++;
+        }
     };
-    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, NULL) == 1)
+    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
     {
-        // printf("is_inner (%d, %d) true\n", point.x, point.y);
-        cnt++;
+        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+        {
+            collision_triangle.point_2.x = collis_point.x;
+            collision_triangle.point_2.y = collis_point.y;
+            cnt++;
+        }
     };
-    if (line_intersection((Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, NULL) == 1)
+    if (line_intersection((Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
     {
-        // printf("is_inner (%d, %d) true\n", point.x, point.y);
-        cnt++;
+        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+        {
+            collision_triangle.point_3.x = collis_point.x;
+            collision_triangle.point_3.y = collis_point.y;
+            cnt++;
+        }
     };
-    // if (cnt == 3)
-    // {
-    //     cnt=2;
-    // }
-    // printf("%d, %d, %d\n", point.x, point.y, cnt);
+    // print_triangle(collision_triangle, "collision_triangle");
+    // printf("%d\n", cnt);
+
     return cnt % 2;
+}
+
+uint8_t is_peak(Triangle triangle, Point point)
+{
+    if ( ((point.x == triangle.point_1.x) && (point.y == triangle.point_1.y)) ||
+    ((point.x == triangle.point_2.x) && (point.y == triangle.point_2.y)) ||
+    ((point.x == triangle.point_3.x) && (point.y == triangle.point_3.y)) )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 static int32_t det(Point a, Point b)
@@ -150,29 +225,30 @@ static int32_t det(Point a, Point b)
     return a.x * b.y - a.y * b.x;
 }
 
-static int32_t max(int32_t a, int32_t b)
-{
-    if (a > b)
-    {
-        return a;
-    }
-    else
-    {
-        return b;
-    }
-}
+// static int32_t max(int32_t a, int32_t b)
+// {
+//     if (a > b)
+//     {
+//         return a;
+//     }
+//     else
+//     {
+//         return b;
+//     }
+// }
 
-static int32_t min(int32_t a, int32_t b)
-{
-    if (a < b)
-    {
-        return a;
-    }
-    else
-    {
-        return b;
-    }
-}
+
+// static int32_t min(int32_t a, int32_t b)
+// {
+//     if (a < b)
+//     {
+//         return a;
+//     }
+//     else
+//     {
+//         return b;
+//     }
+// }
 
 // TODO: function only determines if point near the line
 uint8_t on_segment(Line line, Point point)
@@ -190,21 +266,48 @@ uint8_t on_segment(Line line, Point point)
     }
 }
 
+// uint8_t line_intersection_determinant(Line line_1, Line line_2, Point *intersection_point)
+// {
+//     Point xdiff = {.x=line_1.point_1.x-line_1.point_2.x, .y=line_2.point_1.x-line_2.point_2.x};
+//     Point ydiff = {.x=line_1.point_1.y-line_1.point_2.y, .y=line_2.point_1.y-line_2.point_2.y};
+//     int32_t div=det(xdiff, ydiff);
+//     if (div == 0)
+//     {
+//         return 0;
+//     }
+//     Point d = {.x=det(line_1.point_1, line_1.point_2), .y=det(line_2.point_1, line_2.point_2)};
+//     float x = (float)det(d, xdiff) / div;
+//     float y = (float)det(d, ydiff) / div;
+//     // printf("line_intersection d (%d,%d)\n", (int32_t)x, (int32_t)y);
+//     // printf("line_intersection f (%f,%f)\n", x, y);
+//     Point tmp = {.x = (int32_t)x, .y = (int32_t)y};
+
+//     if ( on_segment(line_1, tmp) && on_segment(line_2, tmp) )
+//     {
+//         if (intersection_point != NULL)
+//         {
+//             intersection_point->x = tmp.x;
+//             intersection_point->y = tmp.y;
+//         }
+//         return 1;    
+//     }
+
+//     else
+//     {
+//         return 0;
+//     }
+// }
+
 uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point)
 {
-    Point xdiff = {.x=line_1.point_1.x-line_1.point_2.x, .y=line_2.point_1.x-line_2.point_2.x};
-    Point ydiff = {.x=line_1.point_1.y-line_1.point_2.y, .y=line_2.point_1.y-line_2.point_2.y};
-    int32_t div=det(xdiff, ydiff);
-    if (div == 0)
-    {
-        return 0;
-    }
-    Point d = {.x=det(line_1.point_1, line_1.point_2), .y=det(line_2.point_1, line_2.point_2)};
-    float x = (float)det(d, xdiff) / div;
-    float y = (float)det(d, ydiff) / div;
-    // printf("line_intersection d (%d,%d)\n", (int32_t)x, (int32_t)y);
-    // printf("line_intersection f (%f,%f)\n", x, y);
-    Point tmp = {.x = (int32_t)x, .y = (int32_t)y};
+    float k1, k2, b1, b2;
+    k1 = (line_1.point_1.y - line_1.point_2.y) / (line_1.point_1.x - line_1.point_2.x);
+    b1 = (line_1.point_1.y - k1*line_1.point_1.x);
+    k2 = (line_2.point_1.y - line_2.point_2.y) / (line_2.point_1.x - line_2.point_2.x);
+    b2 = (line_2.point_1.y - k1*line_2.point_1.x);
+    float x = (b2-b1) / (k1-k2);
+    float y = k1*x + b1;
+    Point tmp = {.x = x, .y = y};
 
     if ( on_segment(line_1, tmp) && on_segment(line_2, tmp) )
     {

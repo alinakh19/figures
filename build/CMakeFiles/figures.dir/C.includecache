@@ -23,8 +23,12 @@ math.h
 -
 stdint.h
 -
+stdio.h
+-
 line.h
 /home/v/Desktop/programming/line.h
+types.h
+/home/v/Desktop/programming/types.h
 
 /home/v/Desktop/programming/triangle.h
 stdint.h
