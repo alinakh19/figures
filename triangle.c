@@ -138,19 +138,20 @@ Triangle get_triangle(Point point_1, Point point_2, Point point_3)
 void print_triangle(Triangle triangle, const char * name)
 {
     printf("-----------\n");
-    printf("Print triangle %s\n");
+    printf("Print triangle %s\n",   name);
     print_point(triangle.point_1, "point_1");
     print_point(triangle.point_2, "point_2");
     print_point(triangle.point_3, "point_3");
     printf("-----------\n");
 }
 
+
 void print_point(Point point, const char * name)
 {
     printf("Point coordinates %s: (%f,%f)\n", name, point.x, point.y);
 }
 
-uint8_t is_point_in_triangle(Point point, Triangle triangle)
+uint8_t is_point_triangle_top(Point point, Triangle triangle)
 {
     if ( ((point.x == triangle.point_1.x) && (point.y == triangle.point_1.y)) ||
     ((point.x == triangle.point_2.x) && (point.y == triangle.point_2.y)) ||
@@ -166,44 +167,95 @@ uint8_t is_point_in_triangle(Point point, Triangle triangle)
 
 uint8_t is_inner(Triangle triangle, Point point)
 {
-    Point point_of_origin;
+    // uint32_t cnt=0;
+    // cnt= cnt + collision_counter(triangle, point);
+   
+    // Point nan_point = {.x = NAN, .y = NAN};
+    // Triangle collision_triangle = get_triangle(nan_point, nan_point, nan_point);
+    // uint8_t cnt = 0;
     
-    Point nan_point = {.x = NAN, .y = NAN};
-    Triangle collision_triangle = get_triangle(nan_point, nan_point, nan_point);
-    uint8_t cnt = 0;
-    Point collis_point;
-    memset(&point_of_origin, 0, sizeof(point_of_origin));
-    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    {
-        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-        {
-            collision_triangle.point_1.x = collis_point.x;
-            collision_triangle.point_1.y = collis_point.y;
-            cnt++;
-        }
-    };
-    if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    {
-        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-        {
-            collision_triangle.point_2.x = collis_point.x;
-            collision_triangle.point_2.y = collis_point.y;
-            cnt++;
-        }
-    };
-    if (line_intersection((Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    {
-        if (!is_point_in_triangle(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-        {
-            collision_triangle.point_3.x = collis_point.x;
-            collision_triangle.point_3.y = collis_point.y;
-            cnt++;
-        }
-    };
-    // print_triangle(collision_triangle, "collision_triangle");
-    // printf("%d\n", cnt);
+    // memset(&point_of_origin, 0, sizeof(point_of_origin));
+    // if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
+    // {
+    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+    //     {
+    //         collision_triangle.point_1.x = collis_point.x;
+    //         collision_triangle.point_1.y = collis_point.y;
+    //         cnt++;
+    //     }
+    // };
+    // if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
+    // {
+    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+    //     {
+    //         collision_triangle.point_2.x = collis_point.x;
+    //         collision_triangle.point_2.y = collis_point.y;
+    //         cnt++;
+    //     }
+    // };
+    // if (line_intersection((Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
+    // {
+    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
+    //     {
+    //         collision_triangle.point_3.x = collis_point.x;
+    //         collision_triangle.point_3.y = collis_point.y;
+    //         cnt++;
+    //     }
+    // };
+    // // print_triangle(collision_triangle, "collision_triangle");
+    // // printf("%d\n", cnt);
 
-    return cnt % 2;
+    return collision_counter(triangle, point) % 2;
+}
+
+uint8_t collision_counter (Triangle triangle, Point point)
+{
+    Point point_of_origin[4];
+    point_of_origin[0] = (Point){.x = 0, .y = 0};
+    point_of_origin[1] = (Point){.x = 0, .y = B};
+    point_of_origin[2] = (Point){.x = A, .y = B};
+    point_of_origin[3] = (Point){.x = A, .y = 0};
+    Point collis_point;
+    Line triangle_lines[3];
+    triangle_lines[0] = (Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2};
+    triangle_lines[1] = (Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3};
+    triangle_lines[2] = (Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3};
+
+    uint32_t intersection_counter = 0;
+    uint8_t valid = 1;
+    for (uint32_t i = 0; i <= 3; i++)
+    {
+        valid = 1;
+        intersection_counter = 0;
+        if (i != 0)
+        {
+            printf("%d \n", i);
+
+        }
+        for (uint32_t j=0; j <= 2; j++)
+        {         
+            if (line_intersection(triangle_lines[j], (Line){.point_1 = point_of_origin[i], .point_2 =  point}, &collis_point) == 1)
+            {
+                if (!is_point_triangle_top(collis_point, triangle))
+                {
+                    intersection_counter++;
+                }
+                else
+                {
+                    j = 3;
+                    intersection_counter = 0;
+                    valid = 0;
+                }
+            }
+        }
+        if (valid)
+        {
+            // printf("Counter: %u\n", intersection_counter);
+            return intersection_counter;
+        }
+    }
+    
+    return intersection_counter;
 }
 
 uint8_t is_peak(Triangle triangle, Point point)

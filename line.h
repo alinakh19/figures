@@ -5,8 +5,8 @@
 #include <stddef.h>
 #include <math.h>
 #include "types.h"
-#define A 50
-#define B 50
+#define A 500
+#define B 500
 #define RGBA(r, g, b, a) ((r) | ((g) << 8) | ((b) << 16) | ((a) << 24))
 static uint32_t gridchart[A+1][B+1];
 

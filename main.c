@@ -47,7 +47,7 @@ void intersection()
 int main()
 {
   
-  while(1)
+  // while(1)
   {
     // intersection();
     triangle();
