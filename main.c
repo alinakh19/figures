@@ -4,12 +4,15 @@
 #include <stdlib.h>
 
 #include <math.h>
-#include "rectangle.h"
 #include "line.h"
 #include "triangle.h"
 
 #include "libattopng.h"
 
+uint32_t random_color(uint8_t alpha)
+{
+  return RGBA(rand() % 0xff, rand() % 0xff, rand() % 0xff, alpha);
+}
 
 void triangle()
 {
@@ -18,11 +21,39 @@ void triangle()
   Point point_of_origin;
   memset(&point_of_origin, 0, sizeof(point_of_origin));
   Point * point_collision;
-  fill_triangle(triangle);
+  // fill_triangle(triangle);
+  // drawTriangle(triangle);
   set_point(triangle.point_1, COLOR_BLUE);
   set_point(triangle.point_2, COLOR_GREEN);
   set_point(triangle.point_3, COLOR_PURPLE);
+  plot_line (triangle.point_1, triangle.point_2, COLOR_PURPLE);
+  plot_line (triangle.point_1, triangle.point_3, COLOR_PURPLE);
+  plot_line (triangle.point_3, triangle.point_2, COLOR_PURPLE);
   put_buf_pixel();
+  // printf("%u %u\n", triangle.point_1.x, triangle.point_1.y);
+  // printf("%u %u\n", triangle.point_2.x, triangle.point_2.y);
+  // printf("%u %u\n", triangle.point_3.x, triangle.point_3.y);
+}
+
+void triangle_check()
+{
+  reset_buf();
+  Point point_of_origin;
+  memset(&point_of_origin, 0, sizeof(point_of_origin));
+  Point * point_collision;
+  for(int i = 0; i < 1000; i++)
+  {
+    // fill_triangle(get_random_triangle());
+    drawTriangle(get_random_triangle(), random_color(0xff));
+  }
+
+  // set_point(triangle.point_1, COLOR_BLUE);
+  // set_point(triangle.point_2, COLOR_GREEN);
+  // set_point(triangle.point_3, COLOR_PURPLE);
+  // plot_line (triangle.point_1, triangle.point_2, COLOR_GREEN);
+  // plot_line (triangle.point_1, triangle.point_3, COLOR_GREEN);
+  // plot_line (triangle.point_3, triangle.point_2, COLOR_GREEN);
+  put_buf_pixel_rgba();
   // printf("%u %u\n", triangle.point_1.x, triangle.point_1.y);
   // printf("%u %u\n", triangle.point_2.x, triangle.point_2.y);
   // printf("%u %u\n", triangle.point_3.x, triangle.point_3.y);
@@ -44,13 +75,26 @@ void intersection()
   }
 }
 
+void test_PNG()
+{
+  Point point_1, point_2;
+  point_1.x = 14;
+  point_1.y = 60;
+  point_2.x = 0;
+  point_2.y = 3;
+  reset_buf();
+  plot_line (point_1, point_2, COLOR_RED);
+  put_buf_pixel();
+}
+
 int main()
 {
   
-  // while(1)
+  while(1)
   {
     // intersection();
-    triangle();
+    // triangle();
+    triangle_check();
   }
   return 0;
 }

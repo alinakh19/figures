@@ -6,8 +6,6 @@ set(CMAKE_BUILD_TYPE "Debug")
 
 set(SOURCE_FILES
 main.c
-rectangle.c
-rectangle.h
 line.c
 line.h
 triangle.c

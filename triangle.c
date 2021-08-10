@@ -167,94 +167,50 @@ uint8_t is_point_triangle_top(Point point, Triangle triangle)
 
 uint8_t is_inner(Triangle triangle, Point point)
 {
-    // uint32_t cnt=0;
-    // cnt= cnt + collision_counter(triangle, point);
-   
-    // Point nan_point = {.x = NAN, .y = NAN};
-    // Triangle collision_triangle = get_triangle(nan_point, nan_point, nan_point);
-    // uint8_t cnt = 0;
-    
-    // memset(&point_of_origin, 0, sizeof(point_of_origin));
-    // if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    // {
-    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-    //     {
-    //         collision_triangle.point_1.x = collis_point.x;
-    //         collision_triangle.point_1.y = collis_point.y;
-    //         cnt++;
-    //     }
-    // };
-    // if (line_intersection((Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    // {
-    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-    //     {
-    //         collision_triangle.point_2.x = collis_point.x;
-    //         collision_triangle.point_2.y = collis_point.y;
-    //         cnt++;
-    //     }
-    // };
-    // if (line_intersection((Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3}, (Line){.point_1 = point_of_origin, .point_2 =  point}, &collis_point) == 1)
-    // {
-    //     if (!is_point_triangle_top(collis_point, collision_triangle) && !is_peak(triangle, collis_point))
-    //     {
-    //         collision_triangle.point_3.x = collis_point.x;
-    //         collision_triangle.point_3.y = collis_point.y;
-    //         cnt++;
-    //     }
-    // };
-    // // print_triangle(collision_triangle, "collision_triangle");
-    // // printf("%d\n", cnt);
-
-    return collision_counter(triangle, point) % 2;
-}
-
-uint8_t collision_counter (Triangle triangle, Point point)
-{
     Point point_of_origin[4];
     point_of_origin[0] = (Point){.x = 0, .y = 0};
     point_of_origin[1] = (Point){.x = 0, .y = B};
     point_of_origin[2] = (Point){.x = A, .y = B};
     point_of_origin[3] = (Point){.x = A, .y = 0};
+
+    for (uint32_t i = 0; i <= 3; i++)
+    {
+        int8_t col_cnt = collision_counter(triangle, (Line){.point_1 = point_of_origin[i], .point_2 =  point});
+        if (col_cnt < 0)
+        {
+            continue;
+        }
+        else
+        {
+            return col_cnt % 2;
+        }
+    }
+    return 0;
+}
+
+int8_t collision_counter (Triangle triangle, Line line)
+{
     Point collis_point;
     Line triangle_lines[3];
     triangle_lines[0] = (Line){.point_1 = triangle.point_1, .point_2 = triangle.point_2};
     triangle_lines[1] = (Line){.point_1 = triangle.point_1, .point_2 = triangle.point_3};
     triangle_lines[2] = (Line){.point_1 = triangle.point_2, .point_2 = triangle.point_3};
 
-    uint32_t intersection_counter = 0;
-    uint8_t valid = 1;
-    for (uint32_t i = 0; i <= 3; i++)
-    {
-        valid = 1;
-        intersection_counter = 0;
-        if (i != 0)
+    uint32_t intersection_counter = 0;    
+    for (uint32_t edge = 0; edge <= 2; edge++)
+    {          
+        if (line_intersection(triangle_lines[edge], line, &collis_point) == 1)
         {
-            printf("%d \n", i);
-
-        }
-        for (uint32_t j=0; j <= 2; j++)
-        {         
-            if (line_intersection(triangle_lines[j], (Line){.point_1 = point_of_origin[i], .point_2 =  point}, &collis_point) == 1)
+            if (!is_point_triangle_top(collis_point, triangle))
             {
-                if (!is_point_triangle_top(collis_point, triangle))
-                {
-                    intersection_counter++;
-                }
-                else
-                {
-                    j = 3;
-                    intersection_counter = 0;
-                    valid = 0;
-                }
+                intersection_counter++;
+            }
+            else
+            {
+                return -1;
             }
         }
-        if (valid)
-        {
-            // printf("Counter: %u\n", intersection_counter);
-            return intersection_counter;
-        }
     }
-    
     return intersection_counter;
 }
 
@@ -375,4 +331,107 @@ uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point)
     {
         return 0;
     }
+}
+
+
+// Standart algorithm for filling triangle deviding it to 2 flat triangles; origin triangle has tops v1, v2,v3
+void fillBottomFlatTriangle(Point v1, Point v2, Point v3, uint32_t color)
+{
+  float invslope1 = (v2.x - v1.x) / (v2.y - v1.y);
+  float invslope2 = (v3.x - v1.x) / (v3.y - v1.y);
+
+  float curx1 = v1.x;
+  float curx2 = v1.x;
+
+  for (int scanlineY = v1.y; scanlineY <= v2.y; scanlineY++)
+  {
+    plot_line_rgba((Point){.x = (int)curx1, .y = scanlineY}, (Point){.x = (int)curx2, .y = scanlineY}, color);
+    curx1 += invslope1;
+    curx2 += invslope2;
+  }
+}
+
+void fillTopFlatTriangle(Point v1, Point v2, Point v3, uint32_t color)
+{
+  float invslope1 = (v3.x - v1.x) / (v3.y - v1.y);
+  float invslope2 = (v3.x - v2.x) / (v3.y - v2.y);
+
+  float curx1 = v3.x;
+  float curx2 = v3.x;
+
+  for (int scanlineY = v3.y; scanlineY > v1.y; scanlineY--)
+  {
+    plot_line_rgba((Point){.x = (int)curx1, .y = scanlineY}, (Point){.x = (int)curx2, .y = scanlineY}, color);
+    curx1 -= invslope1;
+    curx2 -= invslope2;
+  }
+}
+
+// sort the three vertices by y-coordinate ascending so a is the topmost vertice
+void sort(Point a, Point b, Point c, Point *min, Point *mid, Point *max) 
+{
+    min->x = a.x;
+    min->y = a.y;
+    mid->x = b.x;
+    mid->y = b.y;
+    max->x = c.x;
+    max->y = c.y;
+    if (min->y > mid->y)
+    { 
+        mid->x = a.x;
+        mid->y = a.y;
+        min->x = b.x;
+        min->y = b.y;
+    }
+    if (mid->y > max->y)
+    {
+        max->x = mid->x;
+        max->y = mid->y;
+        mid->x = c.x;
+        mid->y = c.y;
+        if (min->y > mid->y)
+        {
+            mid->x = min->x;
+            mid->y = min->y;
+            min->x = c.x;
+            min->y = c.y;
+        }
+    }
+}
+
+void drawTriangle(Triangle triangle, uint32_t color)
+{
+   /* at first sort the three vertices by y-coordinate ascending so v1 is the topmost vertice */
+    Point v1, v2, v3;
+    v1 = triangle.point_1;
+    v2 = triangle.point_2;
+    v3 = triangle.point_3;
+    Point vt1, vt2, vt3, v4;
+    vt1 = v1;
+    vt2 = v2;
+    vt3 = v3;
+    sort(v1, v2, v3, &v1, &v2, &v3);
+    sort(vt1, vt2, vt3, &vt1, &vt2, &vt3);
+
+  /* here we know that v1.y <= v2.y <= v3.y */
+  /* check for trivial case of bottom-flat triangle */
+    if (v2.y == v3.y)
+    {
+        fillBottomFlatTriangle(v1, v2, v3, color);
+    }
+  /* check for trivial case of top-flat triangle */
+    else if (vt1.y == vt2.y)
+    {
+        fillTopFlatTriangle(vt1, vt2, vt3, color);
+    }
+    else
+    {
+    /* general case - split the triangle in a topflat and bottom-flat one */
+        v4 = (Point){.x = (int)(vt1.x + ((float)(vt2.y - vt1.y) / (float)(vt3.y - vt1.y)) * (vt3.x - vt1.x)), .y = vt2.y};
+        fillBottomFlatTriangle(vt1, vt2, v4, color);
+        fillTopFlatTriangle(vt2, v4, vt3, color);
+    }
+    // printf("triangle tops: (%f;%f), (%f;%f), (%f;%f)\n", v1.x, v1.y, v2.x, v2.y, v3.x, v3.y);
+    // printf("v4: (%f;%f)\n", v4.x, v4.y);
+
 }

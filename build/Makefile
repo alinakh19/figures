@@ -204,33 +204,6 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/main.c.s
 .PHONY : main.c.s
 
-rectangle.o: rectangle.c.o
-
-.PHONY : rectangle.o
-
-# target to build an object file
-rectangle.c.o:
-	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.o
-.PHONY : rectangle.c.o
-
-rectangle.i: rectangle.c.i
-
-.PHONY : rectangle.i
-
-# target to preprocess a source file
-rectangle.c.i:
-	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.i
-.PHONY : rectangle.c.i
-
-rectangle.s: rectangle.c.s
-
-.PHONY : rectangle.s
-
-# target to generate assembly for a file
-rectangle.c.s:
-	$(MAKE) -f CMakeFiles/figures.dir/build.make CMakeFiles/figures.dir/rectangle.c.s
-.PHONY : rectangle.c.s
-
 triangle.o: triangle.c.o
 
 .PHONY : triangle.o
@@ -276,9 +249,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... rectangle.o"
-	@echo "... rectangle.i"
-	@echo "... rectangle.s"
 	@echo "... triangle.o"
 	@echo "... triangle.i"
 	@echo "... triangle.s"

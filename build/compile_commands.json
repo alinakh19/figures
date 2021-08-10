@@ -6,11 +6,6 @@
 },
 {
   "directory": "/home/v/Desktop/programming/build",
-  "command": "/bin/x86_64-linux-gnu-gcc-9   -g   -o CMakeFiles/figures.dir/rectangle.c.o   -c /home/v/Desktop/programming/rectangle.c",
-  "file": "/home/v/Desktop/programming/rectangle.c"
-},
-{
-  "directory": "/home/v/Desktop/programming/build",
   "command": "/bin/x86_64-linux-gnu-gcc-9   -g   -o CMakeFiles/figures.dir/line.c.o   -c /home/v/Desktop/programming/line.c",
   "file": "/home/v/Desktop/programming/line.c"
 },

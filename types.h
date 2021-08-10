@@ -11,6 +11,8 @@
        typeof (b) _b = (b); \
      _a < _b ? _a : _b; })
 
+#define RGBA(r, g, b, a) ((r) | ((g) << 8) | ((b) << 16) | ((a) << 24))
+
 typedef struct
 {
     float x;
@@ -38,7 +40,8 @@ typedef enum
     COLOR_BLUE,
     COLOR_BLACK,
     COLOR_WHITE,
-    COLOR_PURPLE
+    COLOR_PURPLE,
+    COLOR_DEFAULT
 }Color;
 
 

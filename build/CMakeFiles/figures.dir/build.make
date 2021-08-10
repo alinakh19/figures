@@ -70,22 +70,9 @@ CMakeFiles/figures.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/figures.dir/main.c.s"
 	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/v/Desktop/programming/main.c -o CMakeFiles/figures.dir/main.c.s
 
-CMakeFiles/figures.dir/rectangle.c.o: CMakeFiles/figures.dir/flags.make
-CMakeFiles/figures.dir/rectangle.c.o: ../rectangle.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/figures.dir/rectangle.c.o"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/figures.dir/rectangle.c.o   -c /home/v/Desktop/programming/rectangle.c
-
-CMakeFiles/figures.dir/rectangle.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/figures.dir/rectangle.c.i"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/v/Desktop/programming/rectangle.c > CMakeFiles/figures.dir/rectangle.c.i
-
-CMakeFiles/figures.dir/rectangle.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/figures.dir/rectangle.c.s"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/v/Desktop/programming/rectangle.c -o CMakeFiles/figures.dir/rectangle.c.s
-
 CMakeFiles/figures.dir/line.c.o: CMakeFiles/figures.dir/flags.make
 CMakeFiles/figures.dir/line.c.o: ../line.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/figures.dir/line.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/figures.dir/line.c.o"
 	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/figures.dir/line.c.o   -c /home/v/Desktop/programming/line.c
 
 CMakeFiles/figures.dir/line.c.i: cmake_force
@@ -98,7 +85,7 @@ CMakeFiles/figures.dir/line.c.s: cmake_force
 
 CMakeFiles/figures.dir/triangle.c.o: CMakeFiles/figures.dir/flags.make
 CMakeFiles/figures.dir/triangle.c.o: ../triangle.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/figures.dir/triangle.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/figures.dir/triangle.c.o"
 	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/figures.dir/triangle.c.o   -c /home/v/Desktop/programming/triangle.c
 
 CMakeFiles/figures.dir/triangle.c.i: cmake_force
@@ -111,7 +98,7 @@ CMakeFiles/figures.dir/triangle.c.s: cmake_force
 
 CMakeFiles/figures.dir/libattopng.c.o: CMakeFiles/figures.dir/flags.make
 CMakeFiles/figures.dir/libattopng.c.o: ../libattopng.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/figures.dir/libattopng.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/figures.dir/libattopng.c.o"
 	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/figures.dir/libattopng.c.o   -c /home/v/Desktop/programming/libattopng.c
 
 CMakeFiles/figures.dir/libattopng.c.i: cmake_force
@@ -125,7 +112,6 @@ CMakeFiles/figures.dir/libattopng.c.s: cmake_force
 # Object files for target figures
 figures_OBJECTS = \
 "CMakeFiles/figures.dir/main.c.o" \
-"CMakeFiles/figures.dir/rectangle.c.o" \
 "CMakeFiles/figures.dir/line.c.o" \
 "CMakeFiles/figures.dir/triangle.c.o" \
 "CMakeFiles/figures.dir/libattopng.c.o"
@@ -134,13 +120,12 @@ figures_OBJECTS = \
 figures_EXTERNAL_OBJECTS =
 
 figures: CMakeFiles/figures.dir/main.c.o
-figures: CMakeFiles/figures.dir/rectangle.c.o
 figures: CMakeFiles/figures.dir/line.c.o
 figures: CMakeFiles/figures.dir/triangle.c.o
 figures: CMakeFiles/figures.dir/libattopng.c.o
 figures: CMakeFiles/figures.dir/build.make
 figures: CMakeFiles/figures.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable figures"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/v/Desktop/programming/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable figures"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/figures.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
