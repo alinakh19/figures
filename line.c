@@ -36,7 +36,6 @@ void set_point_rgba(Point point, uint32_t val)
   if ((point.x >= 0) && (point.x <= A) && (point.y >= 0) && (point.y <= B))
   {
     gridchart[(int32_t)(point.x)][(int32_t)(point.y)] = val;
-    // printf("Draw point with coordinates (%u;%u)\n", x, y);
 
   }
   else
@@ -45,6 +44,7 @@ void set_point_rgba(Point point, uint32_t val)
   }
 }
 
+// Array visualization in strict color pallete
 void put_buf()
 {
   for (uint32_t x=0; x<=A; x++)
@@ -95,13 +95,10 @@ void put_buf()
   }
 }
 
+// PNG visualization in random color pallete
 void put_buf_pixel_rgba()
 {
-// ceate palette image
 libattopng_t *png = libattopng_new(A, B, PNG_RGBA);
-// uint32_t palette[] = {RGBA(0, 0, 0xff, 0xff), RGBA(0, 0xff, 0, 0x80), RGBA(0xff, 0, 0, 0xff), RGBA(0xff, 0, 0xff, 0x80)};
-// // 4 colors: blue, green (50% alpha), red, cyan (50% alpha) 
-// libattopng_set_palette(png, palette, 4);
 
 int x, y;
 for (y = 0; y < B; y++)
@@ -114,16 +111,12 @@ for (y = 0; y < B; y++)
 
 libattopng_save(png, "test_palette.png");
 libattopng_destroy(png);
-
 }
 
+// PNG visualization in strict color pallete
 void put_buf_pixel()
 {
-// ceate palette image
 libattopng_t *png = libattopng_new(A, B, PNG_RGBA);
-// uint32_t palette[] = {RGBA(0, 0, 0xff, 0xff), RGBA(0, 0xff, 0, 0x80), RGBA(0xff, 0, 0, 0xff), RGBA(0xff, 0, 0xff, 0x80)};
-// // 4 colors: blue, green (50% alpha), red, cyan (50% alpha) 
-// libattopng_set_palette(png, palette, 4);
 
 int x, y;
 for (y = 0; y < B; y++)
@@ -174,32 +167,14 @@ for (y = 0; y < B; y++)
           break;
         }
       }
-    // if (gridchart[x][y])
-    // {
-    //   libattopng_set_pixel(png, x, y, (16 % 16) / 4);
-    // }
-    // else
-    // {
-    //   libattopng_set_pixel(png, x, y, (4 % 16) / 4);
-    // }
   }
 }
 
 libattopng_save(png, "test_palette.png");
 libattopng_destroy(png);
-
 }
 
-// void get_points(Point * point)
-// {
-//     static uint32_t cnt = 1;
-//     printf("Enter X coordinate of point %u:\n", cnt);
-//     scanf("%f", point->x);
-//     printf("Enter Y coordinate of point %u:\n", cnt);
-//     scanf("%f", point->y);
-//     cnt++;
-// }
-
+// Plot line in 7 colors
 void  plot_line (Point point_1, Point point_2, Color color)
 {
   int32_t dx =  abs (point_2.x - point_1.x), sx = point_1.x < point_2.x ? 1 : -1;
@@ -217,6 +192,8 @@ void  plot_line (Point point_1, Point point_2, Color color)
     if (e2 <= dx) { err += dx; point_1.y += sy; } /* e_xy+e_y < 0 */
   }
 }
+
+// Plot line in colors
 void plot_line_rgba(Point point_1, Point point_2, uint32_t color)
 {
   int32_t dx =  abs (point_2.x - point_1.x), sx = point_1.x < point_2.x ? 1 : -1;
@@ -234,8 +211,6 @@ void plot_line_rgba(Point point_1, Point point_2, uint32_t color)
     if (e2 <= dx) { err += dx; point_1.y += sy; } /* e_xy+e_y < 0 */
   }
 }
-
-
 
 Point get_random_point()
 {

@@ -12,6 +12,22 @@ stdio.h
 stdint.h
 -
 
+/home/v/Desktop/programming/line.c
+line.h
+/home/v/Desktop/programming/line.h
+libattopng.h
+/home/v/Desktop/programming/libattopng.h
+stdlib.h
+-
+stdio.h
+-
+stdint.h
+-
+string.h
+-
+time.h
+-
+
 /home/v/Desktop/programming/line.h
 stdint.h
 -
@@ -39,6 +55,20 @@ triangle.h
 /home/v/Desktop/programming/triangle.h
 libattopng.h
 /home/v/Desktop/programming/libattopng.h
+
+/home/v/Desktop/programming/triangle.c
+triangle.h
+/home/v/Desktop/programming/triangle.h
+math.h
+-
+stdint.h
+-
+stdio.h
+-
+line.h
+/home/v/Desktop/programming/line.h
+types.h
+/home/v/Desktop/programming/types.h
 
 /home/v/Desktop/programming/triangle.h
 stdint.h

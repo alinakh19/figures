@@ -27,3 +27,18 @@ add feature:
 Point coordinates point_1: (nan,nan)
 Point coordinates point_2: (34.000000,3.000000)
 Point coordinates point_3: (nan,nan)
+
+TODO:
+    - png as lib in cmake
+    - verify algorithms of drawing triangles
+    - delete obsolete code
+    - rename functions
+    - refactor code according Google Code Style
+    - delete irrelevant memcpy uses
+    - mesure time for both algorithms of drawing triangles
+    - add .gitignore
+    - add README.md
+    - find use for function pointer
+    - find use for void*
+    - string reverse
+    

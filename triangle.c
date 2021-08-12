@@ -4,83 +4,6 @@
 #include <stdio.h>
 #include "line.h"
 #include "types.h"
-static int det(Point a, Point b);
-// static int max(int a, int b);
-// static int min(int a, int b);
-static void inner();
-
-static void inner()
-{
-
-}
-
-// void fill_triangle(Point point_1, Point point_2, Point point_3)
-// {  
-//     int32_t tx, ty, counter;
-//     float d1, d2, d3, vx, vy;
-//     //get length of all sides
-//     d1 = sqrt(  pow(point_2.y-point_1.y, 2) +   pow(point_2.x-point_1.x, 2) );
-//     d2 = sqrt(  pow(point_3.y-point_2.y, 2) +   pow(point_3.x-point_2.x, 2) );
-//     d3 = sqrt(  pow(point_1.y-point_3.y, 2) +   pow(point_1.x-point_3.x, 2) );
-//     if(((d1<d2)||(d1 == d2))&&((d1<d2)||(d1 == d2))) //the first side is the shortest
-//     { 
-//         tx = point_1.x;
-//         ty = point_1.y;
-//         vx = ( (int32_t)((int32_t)point_2.x-(int32_t)point_1.x) )/d1;
-//         vy = ( (int32_t)((int32_t)point_2.y-(int32_t)point_1.y) )/d1;
-//         counter = 0;
-//         while(counter<d1)
-//         {  
-//             Point point_tmp;
-//             point_tmp.x = tx;
-//             point_tmp.y = ty;
-//             plot_line(point_3, point_tmp);
-//             //drawing a line from point(point_3.x,point_3.y) to point(tx,ty).
-//             tx = tx + vx;
-//             ty = ty + vy;
-//             counter = counter + 1;
-//         }
-//     }   
-//     else 
-//     { 
-//         if( ( d2 < d3 ) || ( d2 == d3 ) ) //the second side is the shortest
-//         { 
-//             tx = point_2.x;
-//             ty = point_2.y;
-//             vx = (point_3.x-point_2.x)/d2;
-//             vy = (point_3.y-point_2.y)/d2;
-//             counter = 0;
-//             while(counter<d2)
-//             { 
-//                 Point point_tmp;
-//                 point_tmp.x = tx;
-//                 point_tmp.y = ty;
-//                 plot_line(point_1 , point_tmp);
-//                 tx = tx + vx;
-//                 ty = ty + vy;
-//                 counter = counter + 1;
-//             }
-//         }
-//         else // the third side is shortest
-//         {  
-//             tx = point_3.x;
-//             ty = point_3.y;
-//             vx = (point_1.x-point_3.x)/d3;
-//             vy = (point_1.y-point_3.y)/d3;
-//             counter = 0;
-//             while(counter<d3)
-//             { 
-//                 Point point_tmp;
-//                 point_tmp.x = tx;
-//                 point_tmp.y = ty;
-//                 plot_line(point_2, point_tmp);
-//                 tx = tx + vx;
-//                 ty = ty + vy;
-//                 counter = counter + 1;
-//             }
-//         }
-//     }
-// }
 
 Triangle get_random_triangle()
 {
@@ -88,12 +11,13 @@ Triangle get_random_triangle()
   Point point_1 = get_random_point();
   Point point_2 = get_random_point();
   Point point_3 = get_random_point();
-  memcpy(&triangle.point_1, &point_1, sizeof(Point));
-  memcpy(&triangle.point_2, &point_2, sizeof(Point));
-  memcpy(&triangle.point_3, &point_3, sizeof(Point));
+  triangle.point_1 = point_1;
+  triangle.point_2 = point_2;
+  triangle.point_3 = point_3;
   return triangle;
 }
 
+// Algorithm is working with rectangle area that lies between max and min x and y
 void fill_triangle(Triangle triangle)
 {
     Point point;
@@ -102,17 +26,14 @@ void fill_triangle(Triangle triangle)
     point_min.x=min(min(triangle.point_1.x,triangle.point_2.x),triangle.point_3.x);
     point_max.y=max(max(triangle.point_1.y,triangle.point_2.y),triangle.point_3.y);
     point_min.y=min(min(triangle.point_1.y,triangle.point_2.y),triangle.point_3.y);
-    // printf("%f %f %f %f %f\n", triangle.point_1.x, triangle.point_2.x, triangle.point_3.x, point_max.x, point_min.x);
     for (uint32_t x=0; x<=A; x++)
     {
         for (uint32_t y=0; y<=B; y++)
         {
             point.x=x;
             point.y=y;
-            // printf("%u %u\n", x, y);
             if (is_inner(triangle, point))
             {
-                // if ((point.x>point_max.x) && (point.x<point_min.x) || (point.y>point_max.y) && (point.y<point_min.y))
                 if ( on_segment( (Line){.point_1 = point_min,.point_2 = point_max}, point) )
                 {
                     set_point(point, COLOR_RED);
@@ -130,6 +51,7 @@ void fill_triangle(Triangle triangle)
         }
     }
 }
+
 Triangle get_triangle(Point point_1, Point point_2, Point point_3)
 {
     return (Triangle){.point_1 = point_1, .point_2 = point_2,  .point_3 = point_3};
@@ -165,6 +87,7 @@ uint8_t is_point_triangle_top(Point point, Triangle triangle)
     }
 }
 
+// This function returns 1 if point is within the triangle and 0 otherwise
 uint8_t is_inner(Triangle triangle, Point point)
 {
     Point point_of_origin[4];
@@ -188,6 +111,7 @@ uint8_t is_inner(Triangle triangle, Point point)
     return 0;
 }
 
+// The function counts intersections between line, conecting origin point and analyzing point, and triangle edge
 int8_t collision_counter (Triangle triangle, Line line)
 {
     Point collis_point;
@@ -214,6 +138,7 @@ int8_t collision_counter (Triangle triangle, Line line)
     return intersection_counter;
 }
 
+// This function tells if point is one of the triangle peaks
 uint8_t is_peak(Triangle triangle, Point point)
 {
     if ( ((point.x == triangle.point_1.x) && (point.y == triangle.point_1.y)) ||
@@ -228,37 +153,7 @@ uint8_t is_peak(Triangle triangle, Point point)
     }
 }
 
-static int32_t det(Point a, Point b)
-{
-    return a.x * b.y - a.y * b.x;
-}
-
-// static int32_t max(int32_t a, int32_t b)
-// {
-//     if (a > b)
-//     {
-//         return a;
-//     }
-//     else
-//     {
-//         return b;
-//     }
-// }
-
-
-// static int32_t min(int32_t a, int32_t b)
-// {
-//     if (a < b)
-//     {
-//         return a;
-//     }
-//     else
-//     {
-//         return b;
-//     }
-// }
-
-// TODO: function only determines if point near the line
+// TODO: function only determines if point near the line (in rectangle area)
 uint8_t on_segment(Line line, Point point)
 {
     if ( (point.x<=max(line.point_1.x, line.point_2.x)) &&
@@ -274,38 +169,7 @@ uint8_t on_segment(Line line, Point point)
     }
 }
 
-// uint8_t line_intersection_determinant(Line line_1, Line line_2, Point *intersection_point)
-// {
-//     Point xdiff = {.x=line_1.point_1.x-line_1.point_2.x, .y=line_2.point_1.x-line_2.point_2.x};
-//     Point ydiff = {.x=line_1.point_1.y-line_1.point_2.y, .y=line_2.point_1.y-line_2.point_2.y};
-//     int32_t div=det(xdiff, ydiff);
-//     if (div == 0)
-//     {
-//         return 0;
-//     }
-//     Point d = {.x=det(line_1.point_1, line_1.point_2), .y=det(line_2.point_1, line_2.point_2)};
-//     float x = (float)det(d, xdiff) / div;
-//     float y = (float)det(d, ydiff) / div;
-//     // printf("line_intersection d (%d,%d)\n", (int32_t)x, (int32_t)y);
-//     // printf("line_intersection f (%f,%f)\n", x, y);
-//     Point tmp = {.x = (int32_t)x, .y = (int32_t)y};
-
-//     if ( on_segment(line_1, tmp) && on_segment(line_2, tmp) )
-//     {
-//         if (intersection_point != NULL)
-//         {
-//             intersection_point->x = tmp.x;
-//             intersection_point->y = tmp.y;
-//         }
-//         return 1;    
-//     }
-
-//     else
-//     {
-//         return 0;
-//     }
-// }
-
+// This function finds intersection point of two segments, returns 0 if there is none
 uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point)
 {
     float k1, k2, b1, b2;
@@ -334,7 +198,7 @@ uint8_t line_intersection(Line line_1, Line line_2, Point *intersection_point)
 }
 
 
-// Standart algorithm for filling triangle deviding it to 2 flat triangles; origin triangle has tops v1, v2,v3
+// Standart algorithm for filling triangle deviding it to 2 flat triangles; origin triangle has tops v1, v2, v3
 void fillBottomFlatTriangle(Point v1, Point v2, Point v3, uint32_t color)
 {
   float invslope1 = (v2.x - v1.x) / (v2.y - v1.y);
